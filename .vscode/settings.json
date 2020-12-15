@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "/home/jmskinner/.local/share/virtualenvs/queued-8RjvVu5I/bin/python",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Que",
+            "database": "db.sqlite3"
+        }
+    ]
+}

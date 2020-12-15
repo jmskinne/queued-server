@@ -1,0 +1,34 @@
+[
+    {
+        "model" : "queuedapi.itinerary",
+        "pk" : 1,
+        "fields" : {
+            "trip" : 1,
+            "park_date" : "2021-02-02"
+        }
+    },
+    {
+        "model" : "queuedapi.itinerary",
+        "pk" : 2,
+        "fields" : {
+            "trip" : 1,
+            "park_date" : "2021-02-03"
+        }
+    },
+    {
+        "model" : "queuedapi.itinerary",
+        "pk" : 3,
+        "fields" : {
+            "trip" : 1,
+            "park_date" : "2021-06-02"
+        }
+    },
+    {
+        "model" : "queuedapi.itinerary",
+        "pk" : 4,
+        "fields" : {
+            "trip" : 2,
+            "park_date" : "2021-04-02"
+        }
+    }
+]

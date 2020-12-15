@@ -1,0 +1,54 @@
+[
+    {
+        "model": "queuedapi.trip",
+        "pk" : 1,
+        "fields" : {
+            "hotel" : "Contemporary",
+            "date_start" : "2021-02-01",
+            "date_end" : "2021-02-07",
+            "name" : "Vacation, Finally",
+            "vacationer" : 1
+
+        }
+
+    },
+    {
+        "model": "queuedapi.trip",
+        "pk" : 2,
+        "fields" : {
+            "hotel" : "Polynesian",
+            "date_start" : "2021-04-01",
+            "date_end" : "2021-04-07",
+            "name" : "Thank God, vacation",
+            "vacationer" : 2
+
+        }
+
+    },
+    {
+        "model": "queuedapi.trip",
+        "pk" : 3,
+        "fields" : {
+            "hotel" : "Grand Floridian",
+            "date_start" : "2021-05-01",
+            "date_end" : "2021-05-07",
+            "name" : "Welcome Home",
+            "vacationer" : 1
+
+        }
+
+    },
+    {
+        "model": "queuedapi.trip",
+        "pk" : 4,
+        "fields" : {
+            "hotel" : "Animal Kingdom Lodge",
+            "date_start" : "2021-06-01",
+            "date_end" : "2021-06-07",
+            "name" : "Obama Sitting on Llama",
+            "vacationer" : 2
+
+        }
+
+    }
+]

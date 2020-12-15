@@ -1,0 +1,18 @@
+[
+    {
+        "model": "queuedapi.queueuser",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "profile_image_url": "https://static.wikia.nocookie.net/pixar/images/8/83/71423763-2085-4F98-8461-FC6E2C48828E.png/revision/latest/scale-to-width-down/310?cb=20181210152244"
+        }
+    },
+    {
+        "model": "queuedapi.queueuser",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "profile_image_url": "https://static.wikia.nocookie.net/pixar/images/1/1f/Dory-white.jpg/revision/latest/top-crop/width/360/height/360?cb=20110924203518"
+        }
+    }
+]

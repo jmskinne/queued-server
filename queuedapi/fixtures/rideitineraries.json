@@ -1,0 +1,52 @@
+[
+    {
+        "model" : "queuedapi.rideitinerary",
+        "pk" : 1,
+        "fields" : {
+            "itinerary" : 1,
+            "ride_id" : "MK1",
+            "name" : "Mine Train",
+            "order" : 1
+        }
+    },
+    {
+        "model" : "queuedapi.rideitinerary",
+        "pk" : 2,
+        "fields" : {
+            "itinerary" : 1,
+            "ride_id" : "MK2",
+            "name" : "Small World",
+            "order" : 2
+        }
+    },
+    {
+        "model" : "queuedapi.rideitinerary",
+        "pk" : 3,
+        "fields" : {
+            "itinerary" : 1,
+            "ride_id" : "MK3",
+            "name" : "Big Thunder",
+            "order" : 3
+        }
+    },
+    {
+        "model" : "queuedapi.rideitinerary",
+        "pk" : 4,
+        "fields" : {
+            "itinerary" : 1,
+            "ride_id" : "MK4",
+            "name" : "Splash Mtn",
+            "order" : 4
+        }
+    },
+    {
+        "model" : "queuedapi.rideitinerary",
+        "pk" : 5,
+        "fields" : {
+            "itinerary" : 2,
+            "ride_id" : "MK1",
+            "name" : "Mine Train",
+            "order" : 1
+        }
+    }
+]

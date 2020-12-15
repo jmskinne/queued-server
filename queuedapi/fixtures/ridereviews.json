@@ -1,0 +1,35 @@
+[
+    {
+        "model" : "queuedapi.ridereview",
+        "pk" : 1,
+        "fields": {
+            "ride_id": "MK1",
+            "ride_name" : "Mine Train",
+            "reviewer" : 1,
+            "rating" : 5,
+            "review" : "This is my review. I like this ride"
+        }
+    },
+    {
+        "model" : "queuedapi.ridereview",
+        "pk" : 2,
+        "fields": {
+            "ride_id": "MK2",
+            "ride_name" : "Small World",
+            "reviewer" : 2,
+            "rating" : 3,
+            "review" : "This is my review. I like this ride. It is fun."
+        }
+    },
+    {
+        "model" : "queuedapi.ridereview",
+        "pk" : 3,
+        "fields": {
+            "ride_id": "MK1",
+            "ride_name" : "Mine Train",
+            "reviewer" : 2,
+            "rating" : 1,
+            "review" : "Dumb Ride"
+        }
+    }
+]

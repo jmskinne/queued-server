@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from queuedapi.models import QueueUser, RideReview
+from queuedapi.models import QueueUser, RideReview, Ride
 
 class RideUserSerializer(serializers.ModelSerializer):
     """django user serializer"""
@@ -21,12 +21,18 @@ class QueueUserSerializer(serializers.ModelSerializer):
         model = QueueUser
         fields = ("profile_image_url", "user")
 
+class RideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ride
+        fields = ("ride", "name")
+
 class RideReviewSerializer(serializers.ModelSerializer):
     """ride review serializer"""
     reviewer = QueueUserSerializer(many=False)
+    ride = RideSerializer(many=False)
     class Meta:
         model = RideReview
-        fields = ("id", "ride_id", "ride_name", "rating", "review", "reviewer")
+        fields = ("id", "ride_id", "rating", "review","ride", "reviewer")
 
 class RideReviews(ViewSet):
     """ride review view set"""
@@ -34,8 +40,8 @@ class RideReviews(ViewSet):
         """create a ride review"""
         reviewer = QueueUser.objects.get(user=request.auth.user)
         ride_review = RideReview()
-        ride_review.ride_id = request.data["ride_id"]
-        ride_review.ride_name = request.data["ride_name"]
+        ride = Ride.objects.get(pk=request.data["ride_id"])
+        ride_review.ride = ride
         ride_review.rating = request.data["rating"]
         ride_review.review = request.data["review"]
         ride_review.reviewer = reviewer
@@ -98,8 +104,8 @@ class RideReviews(ViewSet):
         current_user = QueueUser.objects.get(user=request.auth.user)
         ride_review = RideReview.objects.get(pk=pk, reviewer=current_user)
         try:
-            ride_review.ride_id = request.data["ride_id"]
-            ride_review.ride_name = request.data["ride_name"]
+            ride = Ride.objects.get(pk=request.data["ride_id"])
+            ride_review.ride = ride
             ride_review.rating = request.data["rating"]
             ride_review.review = request.data["review"]
             ride_review.reviewer = current_user

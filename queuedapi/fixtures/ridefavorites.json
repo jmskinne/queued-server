@@ -3,8 +3,7 @@
         "model" : "queuedapi.ridefavorite",
         "pk" : 1,
         "fields": {
-            "ride_id": "MK1",
-            "ride_name" : "Mine Train",
+            "ride": "MK1",
             "vacationer" : 1,
             "favorite" : true
         }
@@ -13,8 +12,7 @@
         "model" : "queuedapi.ridefavorite",
         "pk" : 2,
         "fields": {
-            "ride_id": "MK2",
-            "ride_name" : "Small World",
+            "ride": "2",
             "vacationer" : 2,
             "favorite" : true
         }
@@ -23,8 +21,7 @@
         "model" : "queuedapi.ridefavorite",
         "pk" : 3,
         "fields": {
-            "ride_id": "MK2",
-            "ride_name" : "Small World",
+            "ride": "3",
             "vacationer" : 1,
             "favorite" : false
         }

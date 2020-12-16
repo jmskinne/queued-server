@@ -4,26 +4,34 @@ from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from queuedapi.models import RideItinerary, Itinerary
+from queuedapi.models import RideItinerary, Itinerary, Ride
 
 class ItinerarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Itinerary
         fields = ("id", "park_date", "trip", "trip_id")
 
+class RideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ride
+        fields = ("name", "lat", "longitude")
+
 class RideItinerarySerializer(serializers.ModelSerializer):
     itinerary = ItinerarySerializer(many=False)
+    ride = RideSerializer(many=False)
     class Meta:
         model = RideItinerary
-        fields = ("id", "ride_id", "name", "order", "itinerary", "itinerary_id")
+        fields = ("id", "ride_id", "order", "ride", "itinerary")
+
+
 
 class RideItineraries(ViewSet):
     def create(self, request):
         itinerary = Itinerary.objects.get(pk=request.data["itinerary_id"])
         ride_itinerary = RideItinerary()
         ride_itinerary.itinerary = itinerary
-        ride_itinerary.ride_id = request.data["ride_id"]
-        ride_itinerary.name = request.data["name"]
+        ride = Ride.objects.get(pk=request.data["ride_id"])
+        ride_itinerary.ride = ride
         ride_itinerary.order = request.data["order"]
         try:
             ride_itinerary.save()

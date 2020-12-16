@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from queuedapi.models import QueueUser, RideFavorite
+from queuedapi.models import QueueUser, RideFavorite, Ride
 
 class RideUserSerializer(serializers.ModelSerializer):
     """django user serializer"""
@@ -21,12 +21,18 @@ class QueueUserSerializer(serializers.ModelSerializer):
         model = QueueUser
         fields = ("profile_image_url", "user")
 
+class RideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ride
+        fields = ("ride", "name")
+
 class RideFavoriteSerializer(serializers.ModelSerializer):
     """ride favorite serializer"""
     vacationer = QueueUserSerializer(many=False)
+    ride = RideSerializer(many=False)
     class Meta:
         model = RideFavorite
-        fields = ("id", "ride_id", "ride_name", "favorite", "vacationer_id", "vacationer")
+        fields = ("id", "ride_id", "favorite", "vacationer_id", "ride", "vacationer")
 
 class RideFavorites(ViewSet):
     """ride favorite"""
@@ -34,8 +40,8 @@ class RideFavorites(ViewSet):
         """add a favorite ride"""
         vacationer = QueueUser.objects.get(user=request.auth.user)
         ride_favorite = RideFavorite()
-        ride_favorite.ride_id = request.data["ride_id"]
-        ride_favorite.ride_name = request.data["ride_name"]
+        ride = Ride.objects.get(pk=request.data["ride_id"])
+        ride_favorite.ride = ride
         ride_favorite.vacationer = vacationer
         ride_favorite.favorite = request.data["favorite"]
         try:

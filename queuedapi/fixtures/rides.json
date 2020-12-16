@@ -1,0 +1,39 @@
+[
+    {
+        "model" : "queuedapi.ride",
+        "pk" : "MK1",
+        "fields": {
+            "name" : "Mine Train",
+            "lat" : 45.4444,
+            "longitude" : -88.999
+        }
+    },
+    {
+        "model" : "queuedapi.ride",
+        "pk" : "2",
+        "fields": {
+            "name" : "Small World",
+            "lat" : 45.4444,
+            "longitude" : -88.999
+        }
+    },
+    {
+        "model" : "queuedapi.ride",
+        "pk" : "3",
+        "fields": {
+            "name" : "Big Thunder",
+            "lat" : 45.4444,
+            "longitude" : -88.999
+        }
+    },
+    {
+        "model" : "queuedapi.ride",
+        "pk" : "4",
+        "fields": {
+            "name" : "Splash Mt",
+            "lat" : 45.4444,
+            "longitude" : -88.999
+        }
+    },
+
+]

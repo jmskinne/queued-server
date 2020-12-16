@@ -4,8 +4,7 @@
         "pk" : 1,
         "fields" : {
             "itinerary" : 1,
-            "ride_id" : "MK1",
-            "name" : "Mine Train",
+            "ride" : 2,
             "order" : 1
         }
     },
@@ -14,8 +13,7 @@
         "pk" : 2,
         "fields" : {
             "itinerary" : 1,
-            "ride_id" : "MK2",
-            "name" : "Small World",
+            "ride" : 2,
             "order" : 2
         }
     },
@@ -24,8 +22,7 @@
         "pk" : 3,
         "fields" : {
             "itinerary" : 1,
-            "ride_id" : "MK3",
-            "name" : "Big Thunder",
+            "ride" : 1,
             "order" : 3
         }
     },
@@ -34,8 +31,7 @@
         "pk" : 4,
         "fields" : {
             "itinerary" : 1,
-            "ride_id" : "MK4",
-            "name" : "Splash Mtn",
+            "ride" : 4,
             "order" : 4
         }
     },
@@ -44,8 +40,7 @@
         "pk" : 5,
         "fields" : {
             "itinerary" : 2,
-            "ride_id" : "MK1",
-            "name" : "Mine Train",
+            "ride" : 1,
             "order" : 1
         }
     }

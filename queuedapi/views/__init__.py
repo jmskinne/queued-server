@@ -5,3 +5,4 @@ from .ridereviews import RideReviews
 from .ridefavorites import RideFavorites
 from .itineraries import Itineraries
 from .rideitineraries import RideItineraries
+from .rides import Rides

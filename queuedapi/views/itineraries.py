@@ -6,19 +6,34 @@ from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from queuedapi.models import Itinerary, Trip
+from queuedapi.models import Itinerary, Trip, QueueUser
+
+class ItineraryUserSerializer(serializers.ModelSerializer):
+    """django user serializer"""
+    class Meta:
+        model = User
+        fields = ("username", "id")
+
+class QueueUserSerializer(serializers.ModelSerializer):
+    """queue user serializer"""
+    user = ItineraryUserSerializer(many=False)
+    class Meta:
+        model = QueueUser
+        fields = ("profile_image_url", "user")
 
 class TripSerializer(serializers.ModelSerializer):
     """trip serializer"""
+    vacationer = QueueUserSerializer(many=False)
     class Meta:
         model = Trip
-        fields = ("id", "vacationer_id", "name", "hotel", "date_start", "date_end")
+        fields = ("id", "vacationer_id", "name", "hotel", "date_start", "date_end", "vacationer")
 
 class ItinerarySerializer(serializers.ModelSerializer):
     trip = TripSerializer(many=False)
+    
     class Meta:
         model = Itinerary
-        fields = ("id", "park_date", "trip", "trip_id")
+        fields = ("id", "park_date", "trip_id", "trip")
 
 class Itineraries(ViewSet):
     """itinerary view"""

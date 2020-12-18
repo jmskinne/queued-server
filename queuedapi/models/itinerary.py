@@ -2,4 +2,4 @@ from django.db import models
 
 class Itinerary(models.Model):
     trip = models.ForeignKey("Trip", on_delete=models.CASCADE)
-    park_date = models.DateField(auto_now=False)
+    park_date = models.DateTimeField()

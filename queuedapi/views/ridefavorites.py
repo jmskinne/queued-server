@@ -66,11 +66,12 @@ class RideFavorites(ViewSet):
 
     def list(self, request):
         ride_favorites = RideFavorite.objects.all()
-
+        
+        current_user = QueueUser.objects.get(user=request.auth.user)
         fav = self.request.query_params.get('favorite', None)
-
+            
         if fav is not None:
-            ride_favorites = ride_favorites.filter(favorite=fav)
+            ride_favorites = ride_favorites.filter(vacationer=current_user, favorite=fav)
 
         serializer = RideFavoriteSerializer(ride_favorites, many=True, context={'request': request})
         return Response(serializer.data)

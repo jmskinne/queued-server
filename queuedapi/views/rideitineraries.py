@@ -21,7 +21,7 @@ class RideItinerarySerializer(serializers.ModelSerializer):
     ride = RideSerializer(many=False)
     class Meta:
         model = RideItinerary
-        fields = ("id", "ride_id", "order", "ride", "itinerary")
+        fields = ("id", "ride_id", "order", "ride", "itinerary", "itinerary_id")
 
 
 

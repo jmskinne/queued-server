@@ -64,7 +64,7 @@ class Itineraries(ViewSet):
         trip = self.request.query_params.get('trip_id', None)
 
         if trip is not None:
-            itineraries = itineraries.filter(trip_id=trip)
+            itineraries = itineraries.filter(trip_id=trip).order_by('park_date')
         
         serializer = serializer = ItinerarySerializer(itineraries, many=True, context={'request': request})
         return Response(serializer.data)

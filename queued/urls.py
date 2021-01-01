@@ -25,6 +25,7 @@ from queuedapi.views import RideFavorites
 from queuedapi.views import Itineraries
 from queuedapi.views import RideItineraries
 from queuedapi.views import Rides
+from queuedapi.views import Profiles
 
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -34,6 +35,7 @@ router.register(r'ridefavorites', RideFavorites, 'ridefavorites')
 router.register(r'itineraries', Itineraries, 'itineraries')
 router.register(r'rideitineraries', RideItineraries, 'rideitineraries')
 router.register(r'rides', Rides, 'rides')
+router.register(r'profile', Profiles, 'profile')
 
 urlpatterns = [
     path('', include(router.urls)),

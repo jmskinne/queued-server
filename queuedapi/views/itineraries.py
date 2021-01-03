@@ -44,9 +44,14 @@ class Itineraries(ViewSet):
         itinerary.trip = trip
         itinerary.park_date = request.data["park_date"]
         try:
-            itinerary.save()
-            serializer = ItinerarySerializer(itinerary, context={'request': request})
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            itineraries = Itinerary.objects.all()
+            datecheck = itineraries.filter(trip_id=trip, park_date=request.data["park_date"]).exists()
+            if datecheck:
+                return Response({'message': 'Already exists'}, status=status.HTTP_409_CONFLICT)
+            else:
+                itinerary.save()
+                serializer = ItinerarySerializer(itinerary, context={'request': request})
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
     

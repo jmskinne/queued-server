@@ -7,6 +7,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from queuedapi.models import Ride
+from django.db.models import Q
 
 class RideSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,5 +38,10 @@ class Rides(ViewSet):
 
     def list(self, request):
         rides = Ride.objects.all()
+
+        search_text = self.request.query_params.get('q', None)
+        if search_text is not None:
+            rides = Ride.objects.filter(Q(name__contains=search_text))
+
         serializer = RideSerializer(rides, many=True, context={'request': request})
         return Response(serializer.data)

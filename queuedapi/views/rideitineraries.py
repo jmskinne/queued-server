@@ -52,7 +52,7 @@ class RideItineraries(ViewSet):
         ride_itineraries = RideItinerary.objects.all()
         itinerary = self.request.query_params.get('itinerary_id', None)
         if itinerary is not None:
-            ride_itineraries = ride_itineraries.filter(itinerary_id=itinerary)
+            ride_itineraries = ride_itineraries.filter(itinerary_id=itinerary).order_by('order')
         serializer = RideItinerarySerializer(ride_itineraries, many=True, context={'request': request})
         return Response(serializer.data)
 

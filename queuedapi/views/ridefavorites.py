@@ -24,7 +24,7 @@ class QueueUserSerializer(serializers.ModelSerializer):
 class RideSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ride
-        fields = ("ride", "name")
+        fields = ("ride", "name", "average_rating")
 
 class RideFavoriteSerializer(serializers.ModelSerializer):
     """ride favorite serializer"""

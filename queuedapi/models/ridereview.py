@@ -7,3 +7,5 @@ class RideReview(models.Model):
     rating = models.IntegerField(null=True)
     review = models.TextField(null=True)
 
+    
+

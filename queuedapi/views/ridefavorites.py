@@ -35,34 +35,34 @@ class RideFavoriteSerializer(serializers.ModelSerializer):
         fields = ("id", "ride_id", "favorite", "vacationer_id", "ride", "vacationer")
 
 class RideFavorites(ViewSet):
-    """ride favorite"""
-    def create(self, request):
-        """add a favorite ride"""
-        vacationer = QueueUser.objects.get(user=request.auth.user)
-        ride_favorite = RideFavorite()
-        ride = Ride.objects.get(pk=request.data["ride_id"])
-        ride_favorite.ride = ride
-        ride_favorite.vacationer = vacationer
-        ride_favorite.favorite = request.data["favorite"]
-        try:
-            ride_favorite.save()
-            serializer = RideFavoriteSerializer(ride_favorite, context={'request': request})
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except ValidationError as ex:
-            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
+#     """ride favorite"""
+#     def create(self, request):
+#         """add a favorite ride"""
+#         vacationer = QueueUser.objects.get(user=request.auth.user)
+#         ride_favorite = RideFavorite()
+#         ride = Ride.objects.get(pk=request.data["ride_id"])
+#         ride_favorite.ride = ride
+#         ride_favorite.vacationer = vacationer
+#         ride_favorite.favorite = request.data["favorite"]
+#         try:
+#             ride_favorite.save()
+#             serializer = RideFavoriteSerializer(ride_favorite, context={'request': request})
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         except ValidationError as ex:
+#             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
-    def retrieve(self, request, pk=None):
-        """get a single object for ride favorites if created by currently authenticated user"""
-        current_user = QueueUser.objects.get(user=request.auth.user)
-        try:
-            ride_favorite = RideFavorite.objects.get(pk=pk, vacationer=current_user)
-            serializer = RideFavoriteSerializer(ride_favorite, context={'request': request})
-            return Response(serializer.data)
-        except RideFavorite.DoesNotExist:
-            return Response(
-                {'message': 'Favorite does not exist for this user'}, 
-                status=status.HTTP_400_BAD_REQUEST
-                )
+    # def retrieve(self, request, pk=None):
+    #     """get a single object for ride favorites if created by currently authenticated user"""
+    #     current_user = QueueUser.objects.get(user=request.auth.user)
+    #     try:
+    #         ride_favorite = RideFavorite.objects.get(pk=pk, vacationer=current_user)
+    #         serializer = RideFavoriteSerializer(ride_favorite, context={'request': request})
+    #         return Response(serializer.data)
+    #     except RideFavorite.DoesNotExist:
+    #         return Response(
+    #             {'message': 'Favorite does not exist for this user'}, 
+    #             status=status.HTTP_400_BAD_REQUEST
+    #             )
 
     def list(self, request):
         ride_favorites = RideFavorite.objects.all()
@@ -76,15 +76,15 @@ class RideFavorites(ViewSet):
         serializer = RideFavoriteSerializer(ride_favorites, many=True, context={'request': request})
         return Response(serializer.data)
 
-    def partial_update(self, request, pk=None):
-        """patch for favoriting or unfavoriting a ride for currently authenticated user"""
-        current_user = QueueUser.objects.get(user=request.auth.user)
-        try:
-            ride_favorite = RideFavorite.objects.get(pk=pk, vacationer=current_user)
-            ride_favorite.favorite = request.data["favorite"]
-            ride_favorite.save()
-            return Response({},
-            status=status.HTTP_204_NO_CONTENT
-            )
-        except ValidationError as ex:
-            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
+    # def partial_update(self, request, pk=None):
+    #     """patch for favoriting or unfavoriting a ride for currently authenticated user"""
+    #     current_user = QueueUser.objects.get(user=request.auth.user)
+    #     try:
+    #         ride_favorite = RideFavorite.objects.get(pk=pk, vacationer=current_user)
+    #         ride_favorite.favorite = request.data["favorite"]
+    #         ride_favorite.save()
+    #         return Response({},
+    #         status=status.HTTP_204_NO_CONTENT
+    #         )
+    #     except ValidationError as ex:
+    #         return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)

@@ -61,7 +61,7 @@ class Trips(ViewSet):
     def list(self, request):
         """lists trips that were created by the currently authenticated user"""
         vacationer = QueueUser.objects.get(user=request.auth.user)
-        trips = Trip.objects.filter(vacationer=vacationer)
+        trips = Trip.objects.filter(vacationer=vacationer).order_by('date_start')
 
         serializer = TripSerializer(trips, many=True, context={"request": request})
         return Response(serializer.data)

@@ -14,7 +14,7 @@ class ItinerarySerializer(serializers.ModelSerializer):
 class RideSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ride
-        fields = ("name", "lat", "longitude")
+        fields = ("name", "lat", "longitude", "average_rating")
 
 class RideItinerarySerializer(serializers.ModelSerializer):
     itinerary = ItinerarySerializer(many=False)

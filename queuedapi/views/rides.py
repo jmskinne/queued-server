@@ -38,11 +38,11 @@ class Rides(ViewSet):
             return Response(False)
 
     def list(self, request):
-        rides = Ride.objects.all()
+        rides = Ride.objects.all().order_by('name')
 
         search_text = self.request.query_params.get('q', None)
         if search_text is not None:
-            rides = Ride.objects.filter(Q(name__contains=search_text))
+            rides = Ride.objects.filter(Q(name__contains=search_text) | Q(ride__contains=search_text))
 
         serializer = RideSerializer(rides, many=True, context={'request': request})
         return Response(serializer.data)

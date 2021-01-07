@@ -32,7 +32,7 @@ class RideReviewSerializer(serializers.ModelSerializer):
     ride = RideSerializer(many=False)
     class Meta:
         model = RideReview
-        fields = ("id", "ride_id", "rating", "review","ride", "reviewer")
+        fields = ("id", "ride_id", "rating", "review","ride", "reviewer", "reviewer_id")
 
 class RideReviews(ViewSet):
     """ride review view set"""
@@ -46,9 +46,14 @@ class RideReviews(ViewSet):
         ride_review.review = request.data["review"]
         ride_review.reviewer = reviewer
         try:
-            ride_review.save()
-            serializer = RideReviewSerializer(ride_review, context={'request': request})
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            rides = RideReview.objects.all()
+            ridecheck = rides.filter(reviewer=reviewer, ride=request.data["ride_id"]).exists()
+            if ridecheck:
+                return Response({'message': 'Already exists'}, status=status.HTTP_409_CONFLICT)
+            else:
+                ride_review.save()
+                serializer = RideReviewSerializer(ride_review, context={'request': request})
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
  

@@ -7,3 +7,4 @@ from .itineraries import Itineraries
 from .rideitineraries import RideItineraries
 from .rides import Rides
 from .profile import Profiles
+from .historicalwaits import HistoricalWaits

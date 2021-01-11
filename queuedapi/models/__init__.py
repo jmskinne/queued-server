@@ -5,3 +5,4 @@ from .rideitinerary import RideItinerary
 from .ridereview import RideReview
 from .trip import Trip
 from .ride import Ride
+from .historicalwait import HistoricalWait

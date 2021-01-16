@@ -68,7 +68,9 @@ INSTALLED_APPS = [
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'https://queued-client-krnqm.ondigitalocean.app/'
+
 )
 
 MIDDLEWARE = [

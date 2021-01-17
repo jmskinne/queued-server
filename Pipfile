@@ -15,6 +15,8 @@ pylint-django = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 dj-database-url = "*"
+requests = "*"
+schedule = "*"
 
 [requires]
 python_version = "3.8"

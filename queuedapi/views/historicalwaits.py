@@ -59,58 +59,58 @@ class HistoricalWaits(ViewSet):
     #         wait_times.append(each_ride)
     #     print(wait_times)
 
-    def get_mk_waits():
-        url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldMagicKingdom/waittime'
-        res = requests.get(url)
-        waits = res.json()
-        for testing in waits:
-            each_ride = HistoricalWait()
-            each_ride.ride = testing['id']
-            each_ride.wait = testing['waitTime']
-            each_ride.save()
+    # def get_mk_waits():
+    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldMagicKingdom/waittime'
+    #     res = requests.get(url)
+    #     waits = res.json()
+    #     for testing in waits:
+    #         each_ride = HistoricalWait()
+    #         each_ride.ride = testing['id']
+    #         each_ride.wait = testing['waitTime']
+    #         each_ride.save()
             
     
 
-    def get_ak_waits():
-        url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldAnimalKingdom/waittime'
-        res = requests.get(url)
-        waits = res.json()
-        for testing in waits:
-            each_ride = HistoricalWait()
-            each_ride.ride = testing['id']
-            each_ride.wait = testing['waitTime']
-            each_ride.save()
+    # def get_ak_waits():
+    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldAnimalKingdom/waittime'
+    #     res = requests.get(url)
+    #     waits = res.json()
+    #     for testing in waits:
+    #         each_ride = HistoricalWait()
+    #         each_ride.ride = testing['id']
+    #         each_ride.wait = testing['waitTime']
+    #         each_ride.save()
 
-    def get_epcot_waits():
-        url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldEpcot/waittime'
-        res = requests.get(url)
-        waits = res.json()
-        for testing in waits:
-            each_ride = HistoricalWait()
-            each_ride.ride = testing['id']
-            each_ride.wait = testing['waitTime']
-            each_ride.save()
+    # def get_epcot_waits():
+    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldEpcot/waittime'
+    #     res = requests.get(url)
+    #     waits = res.json()
+    #     for testing in waits:
+    #         each_ride = HistoricalWait()
+    #         each_ride.ride = testing['id']
+    #         each_ride.wait = testing['waitTime']
+    #         each_ride.save()
     
-    def get_hs_waits():
-        url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldHollywoodStudios/waittime'
-        res = requests.get(url)
-        waits = res.json()
-        for testing in waits:
-            each_ride = HistoricalWait()
-            each_ride.ride = testing['id']
-            each_ride.wait = testing['waitTime']
-            each_ride.save()
+    # def get_hs_waits():
+    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldHollywoodStudios/waittime'
+    #     res = requests.get(url)
+    #     waits = res.json()
+    #     for testing in waits:
+    #         each_ride = HistoricalWait()
+    #         each_ride.ride = testing['id']
+    #         each_ride.wait = testing['waitTime']
+    #         each_ride.save()
 
 
-    schedule.every(1).minutes.do(get_mk_waits)
-    schedule.every(1).minutes.do(get_epcot_waits)
-    schedule.every(1).minutes.do(get_hs_waits)
-    schedule.every(1).minutes.do(get_ak_waits)
+    # schedule.every(1).minutes.do(get_mk_waits)
+    # schedule.every(1).minutes.do(get_epcot_waits)
+    # schedule.every(1).minutes.do(get_hs_waits)
+    # schedule.every(1).minutes.do(get_ak_waits)
 
 
-    while True:
-        schedule.run_pending()
-        time.sleep(10)
+    
+    
+       
 
     
     

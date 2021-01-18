@@ -9,6 +9,7 @@ from queuedapi.models import HistoricalWait
 import schedule
 import time
 import requests
+import threading
 
 
 class WaitSerializer(serializers.ModelSerializer):
@@ -50,6 +51,7 @@ class HistoricalWaits(ViewSet):
 
     
     # def get_historical_waits():
+    ##just testing
     #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldMagicKingdom/waittime'
     #     res = requests.get(url)
     #     waits = res.json()
@@ -59,53 +61,94 @@ class HistoricalWaits(ViewSet):
     #         wait_times.append(each_ride)
     #     print(wait_times)
 
-    # def get_mk_waits():
-    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldMagicKingdom/waittime'
-    #     res = requests.get(url)
-    #     waits = res.json()
-    #     for testing in waits:
-    #         each_ride = HistoricalWait()
-    #         each_ride.ride = testing['id']
-    #         each_ride.wait = testing['waitTime']
-    #         each_ride.save()
-            
     
-
-    # def get_ak_waits():
-    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldAnimalKingdom/waittime'
-    #     res = requests.get(url)
-    #     waits = res.json()
-    #     for testing in waits:
-    #         each_ride = HistoricalWait()
-    #         each_ride.ride = testing['id']
-    #         each_ride.wait = testing['waitTime']
-    #         each_ride.save()
-
-    # def get_epcot_waits():
-    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldEpcot/waittime'
-    #     res = requests.get(url)
-    #     waits = res.json()
-    #     for testing in waits:
-    #         each_ride = HistoricalWait()
-    #         each_ride.ride = testing['id']
-    #         each_ride.wait = testing['waitTime']
-    #         each_ride.save()
     
-    # def get_hs_waits():
-    #     url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldHollywoodStudios/waittime'
-    #     res = requests.get(url)
-    #     waits = res.json()
-    #     for testing in waits:
-    #         each_ride = HistoricalWait()
-    #         each_ride.ride = testing['id']
-    #         each_ride.wait = testing['waitTime']
-    #         each_ride.save()
-
-
     # schedule.every(1).minutes.do(get_mk_waits)
-    # schedule.every(1).minutes.do(get_epcot_waits)
-    # schedule.every(1).minutes.do(get_hs_waits)
-    # schedule.every(1).minutes.do(get_ak_waits)
+    ##works on local, breaks digital ocean server
+    #     while True:
+    #         schedule.run_pending()
+    #         time.sleep(1)
+def get_mk_waits():
+    url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldMagicKingdom/waittime'
+    res = requests.get(url)
+    waits = res.json()
+    for testing in waits:
+        each_ride = HistoricalWait()
+        each_ride.ride = testing['id']
+        each_ride.wait = testing['waitTime']
+        each_ride.save()
+
+def get_ak_waits():
+    url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldAnimalKingdom/waittime'
+    res = requests.get(url)
+    waits = res.json()
+    for testing in waits:
+        each_ride = HistoricalWait()
+        each_ride.ride = testing['id']
+        each_ride.wait = testing['waitTime']
+        each_ride.save()
+
+def get_epcot_waits():
+    url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldEpcot/waittime'
+    res = requests.get(url)
+    waits = res.json()
+    for testing in waits:
+        each_ride = HistoricalWait()
+        each_ride.ride = testing['id']
+        each_ride.wait = testing['waitTime']
+        each_ride.save()
+
+def get_hs_waits():
+    url = 'https://api.themeparks.wiki/preview/parks/WaltDisneyWorldHollywoodStudios/waittime'
+    res = requests.get(url)
+    waits = res.json()
+    for testing in waits:
+        each_ride = HistoricalWait()
+        each_ride.ride = testing['id']
+        each_ride.wait = testing['waitTime']
+        each_ride.save()
+
+        
+class ContinuousScheduler(schedule.Scheduler):
+    def run_continuously(self, interval=1):
+        cease_continuous_run = threading.Event()
+        class ScheduleThread(threading.Thread):
+            @classmethod
+            def run(cls):
+                while not cease_continuous_run.is_set() and self.jobs:
+                    self.run_pending()
+                    time.sleep(interval)
+        
+        continuous_thread = ScheduleThread()
+        continuous_thread.start()
+        return cease_continuous_run
+
+
+
+mk_wait = ContinuousScheduler()
+ak_wait = ContinuousScheduler()
+ep_wait = ContinuousScheduler()
+hs_wait = ContinuousScheduler()
+
+mk_wait.every(30).minutes.do(get_mk_waits)
+ak_wait.every(30).minutes.do(get_ak_waits)
+ep_wait.every(30).minutes.do(get_epcot_waits)
+hs_wait.every(30).minutes.do(get_hs_waits)
+
+
+
+getting_mk_waits = mk_wait.run_continuously()
+getting_ak_waits = ak_wait.run_continuously()
+getting_ep_waits = ep_wait.run_continuously()
+getting_hs_waits = hs_wait.run_continuously()
+
+
+    
+
+
+
+
+    
 
 
     

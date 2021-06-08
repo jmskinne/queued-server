@@ -75,8 +75,9 @@ INSTALLED_APPS = [
 # )
 
 CORS_ALLOWED_ORIGINS = [
-    'http://queued-client-krnqm.ondigitalocean.app',
-    'https://queued-client-krnqm.ondigitalocean.app'
+    'http://queued-client-dc4ns.ondigitalocean.app/',
+    'https://queued-client-dc4ns.ondigitalocean.app/',
+    'https://queued-client-dc4ns.ondigitalocean.app'
 ]
 
 MIDDLEWARE = [
